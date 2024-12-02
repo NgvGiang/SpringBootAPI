@@ -29,29 +29,12 @@ public class AuthenticationService  {
         this.passwordEncoder = passwordEncoder;
     }
 
-//    public ResponseEntity<?> login(User user) {
-//        Authentication authentication = authenticationManager.authenticate(
-//                new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(),user.getAuthorities())
-//        );
-//        if (authentication.isAuthenticated()) {
-//            User user = (User) authentication.getPrincipal();
-//            String refreshToken = jwtTokenProvider.getRefreshToken(user);
-//            String accessToken = jwtTokenProvider.createAccessTokenFromRefreshToken(refreshToken);
-//            Map<String, String> tokens = new HashMap<>();
-//            tokens.put("refreshToken", refreshToken);
-//            tokens.put("accessToken", accessToken);
-//            return  ResponseEntity.ok(tokens);
-//        } else {
-//            throw new RuntimeException("Invalid credentials");
-//        }
-//
-//    }
     public AuthResponse registerUser(@RequestParam RegisterRequest registerRequest) { // ko cần @Valid vì đã kiểm tra ở controller
         User user = new User(
                 registerRequest.getUsername(),
                 registerRequest.getEmail(),
                 passwordEncoder.encode(registerRequest.getPassword()),
-                "User"
+                registerRequest.getRoles()
         );
 
         userRepository.save(user);

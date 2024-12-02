@@ -57,8 +57,9 @@ public class SecurityConfig {
                 )
 
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .requestMatchers("/public-api/**","/api/auth/**", "/refresh-token").permitAll()// Các endpoint không cần JWT
-                        .requestMatchers("/admin/**").hasRole("ADMIN") // đi kèm với xác thực role, không có permitAll
+                         // đi kèm với xác thực role, không có permitAll
                         .anyRequest().authenticated() // Các endpoint còn lại yêu cầu xác thực
                 )
 

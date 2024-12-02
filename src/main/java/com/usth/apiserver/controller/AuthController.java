@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/auth")
 public class AuthController {
     private final AuthenticationService authenticationService;
-    private final AuthenticationManager authenticationManager;
 
-    public AuthController(AuthenticationService authenticationService, AuthenticationManager authenticationManager) {
+
+    public AuthController(AuthenticationService authenticationService) {
         this.authenticationService = authenticationService;
-        this.authenticationManager = authenticationManager;
+
     }
 
 
@@ -43,5 +43,7 @@ public class AuthController {
     @GetMapping("/login")
     public ResponseEntity<AuthResponse> loginUser(@Valid @RequestBody LoginRequest loginRequest){
         return ResponseEntity.ok(authenticationService.login(loginRequest));
+
     }
+
 }

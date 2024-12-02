@@ -53,5 +53,8 @@ public class UserController {
         userService.deleteUser(id);
         return ResponseEntity.ok("User deleted");
     }
-
+    @GetMapping("/admin/hello")
+    public String hello() {
+        return "Hello admin";
+    }
 }
